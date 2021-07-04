@@ -57,3 +57,6 @@ Figure 7 shows the distribution of words by frequency, *i.e.*, the number of occ
 Figure 7: Histogram illustrating the distribuition of words with respect to the frequency
 
 These characteristics make \#PraCegoVer more challenging than MS COCO Captions.
+
+## Authors
+Gabriel Oliveira (@gabrielsantosrv), Esther Colombini (@estherlc) and Sandra Avila (@sandraavila). 
