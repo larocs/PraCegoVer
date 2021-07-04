@@ -59,4 +59,4 @@ Figure 7: Histogram illustrating the distribuition of words with respect to the 
 These characteristics make \#PraCegoVer more challenging than MS COCO Captions.
 
 ## Authors
-Gabriel Oliveira (@gabrielsantosrv), Esther Colombini (@estherlc) and Sandra Avila (@sandraavila). 
+Gabriel Oliveira ([@gabrielsantosrv](https://github.com/gabrielsantosrv)), Esther Colombini ([@estherlc](https://github.com/estherlc)) and Sandra Avila ([@sandraavila](https://github.com/sandraavila)). 
