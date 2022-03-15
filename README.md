@@ -15,7 +15,7 @@ raw caption, the clean caption, and the post date. Each instance in _dataset.jso
 in the images directory whose filename is pointed by the attribute
 _filename_. The instances have the following structure:
 
-![Instance](https://github.com/gabrielsantosrv/PraCegoVer/blob/main/assets/instance.png).
+![Instance](https://github.com/gabrielsantosrv/PraCegoVer/blob/main/assets/instance.png)
 
 ## Motivation
 
