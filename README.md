@@ -8,6 +8,15 @@ Instagram.
 The **\#PraCegoVer** dataset is available upon request for **non-commercial purposes only**. It can be requested and
 downloaded on our data repository on [Zenodo](https://doi.org/10.5281/zenodo.5710562).
 
+The dataset is composed of the main file _dataset.json_ and a collection of compressed files containing the images. The
+file _dataset.json_ comprehends a list of json objects with the attributes: _user_, _filename_, _raw_caption_, _caption_
+and _date_. These attributes represent, respectively, the anonymized user that made the post, the image file name, the
+raw caption, the clean caption, and the post date. Each instance in _dataset.json_ is associated with exactly one image
+in the images directory whose filename is pointed by the attribute
+_filename_. The instances have the following structure:
+
+![Instance](https://github.com/gabrielsantosrv/PraCegoVer/blob/main/assets/instance.png).
+
 ## Motivation
 
 Automatically describing images using natural sentences is an essential task to visually impaired people's inclusion on
