@@ -85,3 +85,21 @@ These characteristics make \#PraCegoVer more challenging than MS COCO Captions.
 
 Gabriel Oliveira ([@gabrielsantosrv](https://github.com/gabrielsantosrv)), Esther
 Colombini ([@estherlc](https://github.com/estherlc)) and Sandra Avila ([@sandraavila](https://github.com/sandraavila)). 
+
+## Citation
+If you use our code or dataset, please cite as:
+
+```
+@Article{pracegover2022,
+AUTHOR = {dos Santos, Gabriel Oliveira and Colombini, Esther Luna and Avila, Sandra},
+TITLE = {#PraCegoVer: A Large Dataset for Image Captioning in Portuguese},
+JOURNAL = {Data},
+VOLUME = {7},
+YEAR = {2022},
+NUMBER = {2},
+ARTICLE-NUMBER = {13},
+URL = {https://www.mdpi.com/2306-5729/7/2/13},
+ISSN = {2306-5729},
+DOI = {10.3390/data7020013}
+}
+```
