@@ -6,7 +6,7 @@ Instagram.
 ## Download
 
 The **\#PraCegoVer** dataset is available upon request for **non-commercial purposes only**. It can be requested and
-downloaded on our data repository on [Zenodo](https://doi.org/10.5281/zenodo.5710562).
+downloaded on our data repository on [Zenodo](https://zenodo.org/record/7548638).
 
 The dataset is composed of the main file _dataset.json_ and a collection of compressed files containing the images. The
 file _dataset.json_ comprehends a list of json objects with the attributes: _user_, _filename_, _raw_caption_, _caption_
@@ -16,6 +16,11 @@ in the images directory whose filename is pointed by the attribute
 _filename_. The instances have the following structure:
 
 ![Instance](https://github.com/gabrielsantosrv/PraCegoVer/blob/main/assets/instance.png)
+
+#### New Release
+- **18/Jan/2023** - [Download](https://zenodo.org/record/7548638)
+
+We release ***pracegover_400k.json*** which contains 403,337 examples from the original ***dataset.json***  after preprocessing and duplication removal. It is split into train, validation, and test with 242036, 80628, and 80673 examples, respectively.
 
 ## Motivation
 
