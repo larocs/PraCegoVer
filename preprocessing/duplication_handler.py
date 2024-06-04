@@ -31,9 +31,10 @@ def group_by_cluster(clusters):
     return groups
 
 
-def compute_duplications(image_features, text_features, clusters,
+def deduplicate(image_features, text_features, clusters,
                          threshold_img=0.1, threshold_text=0.1):
     groups = group_by_cluster(clusters)
+    dedup_indeces = []
     with open("duplications.json", "w") as file:
         for cluster, example_indices in tqdm.tqdm(groups.items()):
             # computing image distance matrix
@@ -55,3 +56,6 @@ def compute_duplications(image_features, text_features, clusters,
             # save duplications
             for c in nx.connected_components(G):
                 file.write(f"{c}\n")
+            dedup_indeces.append(c)
+
+    return dedup_indeces

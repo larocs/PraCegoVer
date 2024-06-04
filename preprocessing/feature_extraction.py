@@ -37,9 +37,8 @@ class Dataset(torch.utils.data.Dataset):
             pass
 
 
-def image_feature_extraction(dataset, images_dir):
+def image_feature_extraction(dataset, images_dir, device):
     print('Extracting image features...')
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     pracegover_dataset = Dataset(dataset, images_dir=images_dir)
     dataloader = torch.utils.data.DataLoader(pracegover_dataset, shuffle=False,
                                              batch_size=1000,
