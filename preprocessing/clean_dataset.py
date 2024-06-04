@@ -21,7 +21,7 @@ def parse_args():
 
 def remove_duplicated_captions(dataset):
     d = defaultdict(lambda: [])
-    for example in tdqm.tqdm(dataset, desc="Removing duplicated captions"):
+    for example in tqdm.tqdm(dataset, desc="Removing duplicated captions"):
         d[example["caption"].lower()].append(example)
 
     return [v[0] for v in d.values() if len(v[0]["caption"].split()) > 3]
@@ -54,7 +54,7 @@ def capivara_filter(dataset, images_dir, clip_thr, device):
     text_batch = []
     image_batch = []
     output_data = []
-    for example in tdqm.tqdm(dataset, desc="Capivara Filter"):
+    for example in tqdm.tqdm(dataset, desc="Capivara Filter"):
         text_input = text_tokenizer(example["caption"])
         try:
             image = PIL.Image.open(os.path.join(images_dir, example["filename"])).convert('RGB')
