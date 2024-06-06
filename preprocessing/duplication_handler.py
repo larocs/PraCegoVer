@@ -4,7 +4,7 @@ import hdbscan
 import networkx as nx
 import numpy as np
 from sklearn.metrics import pairwise_distances
-from tqdm import tqdm
+import tqdm
 
 
 def get_clusters(features):
@@ -56,6 +56,6 @@ def deduplicate(image_features, text_features, clusters,
             # save duplications
             for c in nx.connected_components(G):
                 file.write(f"{c}\n")
-            dedup_indeces.append(c)
+                dedup_indeces.append(list(c)[0])
 
     return dedup_indeces

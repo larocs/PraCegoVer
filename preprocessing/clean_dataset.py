@@ -62,7 +62,7 @@ def capivara_filter(dataset, images_dir, clip_thr, device):
         except:
             continue
 
-        if len(example_list) < 100:
+        if len(example_list) < 200:
             text_batch.append(text_input)
             image_batch.append(image_input)
             example_list.append(example)
@@ -87,7 +87,7 @@ def capivara_filter(dataset, images_dir, clip_thr, device):
         batch = image_batch, text_batch
         similarities = compute_capivara_similarity(model, batch, device)
         for example, sim in zip(example_list, similarities):
-            if sim >= args.threshold:
+            if sim >= clip_thr:
                 output_data.append(example)
 
     del model
@@ -119,6 +119,6 @@ if __name__ == "__main__":
     dedup_indices = deduplicate(image_features, text_features, clusters)
     dataset = [dataset[index] for index in dedup_indices]
 
-    with open("clean_dataset.json") as file:
+    with open("clean_dataset.json", "w") as file:
         json.dump(dataset, file)
 

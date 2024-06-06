@@ -6,7 +6,7 @@ from PIL import Image
 from sklearn.feature_extraction.text import TfidfVectorizer
 from torch import nn
 from torchvision import transforms
-from tqdm import tqdm
+import tqdm
 from nltk.corpus import stopwords
 import numpy as np
 
@@ -47,7 +47,7 @@ def image_feature_extraction(dataset, images_dir, device):
     model = model.to(device)
     model.eval()
     feature_list = []
-    for batch in tqdm.tqdm_notebook(dataloader):
+    for batch in tqdm.tqdm(dataloader):
         batch = batch.to(device)
         with torch.no_grad():
             x = model.features(batch)
