@@ -41,7 +41,7 @@ def image_feature_extraction(dataset, images_dir, device):
     print('Extracting image features...')
     pracegover_dataset = Dataset(dataset, images_dir=images_dir)
     dataloader = torch.utils.data.DataLoader(pracegover_dataset, shuffle=False,
-                                             batch_size=1000,
+                                             batch_size=2000,
                                              num_workers=10)
     model = torch.hub.load('pytorch/vision:v0.10.0', 'mobilenet_v2', pretrained=True)
     model = model.to(device)
@@ -56,15 +56,16 @@ def image_feature_extraction(dataset, images_dir, device):
 
     features = torch.concat(feature_list, dim=0)
 
-    print('Reducing dimensions of image features...')
-    reducer = umap.UMAP(n_neighbors=80,
-                        min_dist=0,
-                        n_components=900,
-                        random_state=42,
-                        metric='correlation')
-
-    features = reducer.fit_transform(features.cpu())
-    np.save("image_features.npy", features)
+    # print('Reducing dimensions of image features...')
+    # reducer = umap.UMAP(n_neighbors=80,
+    #                     min_dist=0,
+    #                     n_components=900,
+    #                     random_state=42,
+    #                     metric='correlation')
+    #
+    # features = reducer.fit_transform(features.cpu())
+    np.save("image_features.npy", features.cpu())
+    del model
     return features
 
 

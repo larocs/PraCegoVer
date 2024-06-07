@@ -1,15 +1,16 @@
 from collections import defaultdict
 
-import hdbscan
+import cuml
 import networkx as nx
+import cugraph as cnx
 import numpy as np
-from sklearn.metrics import pairwise_distances
 import tqdm
+from sklearn.metrics import pairwise_distances
 
 
 def get_clusters(features):
-    clusterer = hdbscan.HDBSCAN(min_cluster_size=200,
-                                min_samples=10, gen_min_span_tree=True)
+    clusterer = cuml.cluster.hdbscan.HDBSCAN(min_cluster_size=200, min_samples=10,
+                                             gen_min_span_tree=True, verbose=True)
     clusterer.fit(features)
     labels = np.asarray(clusterer.labels_)
     np.save("clusters.npy", labels)
@@ -54,7 +55,7 @@ def deduplicate(image_features, text_features, clusters,
 
             assert len(G) == len(example_indices), "Graph has an unexpected number of nodes."
             # save duplications
-            for c in nx.connected_components(G):
+            for c in cnx.connected_components(G, directed=False):
                 file.write(f"{c}\n")
                 dedup_indeces.append(list(c)[0])
 
