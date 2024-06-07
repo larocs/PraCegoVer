@@ -10,6 +10,7 @@ from sklearn.metrics import pairwise_distances
 
 def get_clusters(features):
     clusterer = cuml.cluster.hdbscan.HDBSCAN(min_cluster_size=200, min_samples=10,
+                                             max_cluster_size=10000,
                                              gen_min_span_tree=True, verbose=True)
     clusterer.fit(features)
     labels = np.asarray(clusterer.labels_)
@@ -22,13 +23,13 @@ def group_by_cluster(clusters):
     for i, cluster in enumerate(clusters):
         groups[cluster].append(i)
 
-    # split outlier cluster into ~10 sub clusters
-    n_slice = 10
-    cluster_size = len(groups[-1]) // n_slice
-    for i in range(n_slice + 1):
-        groups[-(i + 2)] = groups[-1][i * cluster_size:(i + 1) * cluster_size]
-
-    del groups[-1]
+    # # split outlier cluster into ~10 sub clusters
+    # n_slice = 10
+    # cluster_size = len(groups[-1]) // n_slice
+    # for i in range(n_slice + 1):
+    #     groups[-(i + 2)] = groups[-1][i * cluster_size:(i + 1) * cluster_size]
+    #
+    # del groups[-1]
     return groups
 
 
