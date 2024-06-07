@@ -11,7 +11,7 @@ from sklearn.metrics import pairwise_distances
 def get_clusters(features):
     clusterer = cuml.cluster.hdbscan.HDBSCAN(min_cluster_size=200, min_samples=10,
                                              max_cluster_size=10000,
-                                             gen_min_span_tree=True, verbose=True)
+                                             gen_min_span_tree=True, verbose=True, output_type='numpy')
     clusterer.fit(features)
     labels = np.asarray(clusterer.labels_)
     np.save("clusters.npy", labels)
@@ -36,6 +36,7 @@ def group_by_cluster(clusters):
 def deduplicate(image_features, text_features, clusters,
                          threshold_img=0.1, threshold_text=0.1):
     groups = group_by_cluster(clusters)
+    
     dedup_indeces = []
     with open("duplications.json", "w") as file:
         for cluster, example_indices in tqdm.tqdm(groups.items()):
@@ -55,9 +56,15 @@ def deduplicate(image_features, text_features, clusters,
                         G.add_edge(example_indices[i], example_indices[j])
 
             assert len(G) == len(example_indices), "Graph has an unexpected number of nodes."
-            # save duplications
-            for c in cnx.connected_components(G, directed=False):
-                file.write(f"{c}\n")
-                dedup_indeces.append(list(c)[0])
 
+            # save duplications
+            components = cnx.connected_components(G)
+            duplicates = defaultdict(lambda: [])
+            for example_index, c in components.items():
+                duplicates[c].append(example_index)
+
+            for dups in duplicates.values():
+                file.write(f"{dups}\n")
+                dedup_indeces.append(dups[0])
+            
     return dedup_indeces

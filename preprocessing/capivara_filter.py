@@ -33,7 +33,7 @@ class CapivaraDataset(torch.utils.data.Dataset):
 def compute_capivara_similarity(model, batch, device):
     image_input, text_input = batch
     image_input = image_input.to(device)
-    text_input = text_input.to(device)
+    text_input = text_input.reshape((-1, 77)).to(device)
 
     img_features = model.encode_image(image_input)
     txt_features = model.encode_text(text_input)
@@ -64,8 +64,12 @@ def capivara_filter(dataset, images_dir, clip_thr, device):
     for image_input, text_input, example_list in tqdm.tqdm(dataloader, desc="Capivara Filter"):
         batch = image_input, text_input
         similarities = compute_capivara_similarity(model, batch, device)
-        for example, sim in zip(example_list, similarities):
+        for i, sim in enumerate(similarities):
             if sim >= clip_thr:
+                example = {}
+                for k, v in example_list.items():
+                    example[k] = v[i]
+                # print(example)
                 output_data.append(example)
 
     del model
