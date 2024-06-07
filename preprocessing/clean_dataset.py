@@ -43,7 +43,6 @@ if __name__ == "__main__":
     with open("dataset_capivara.json", "w") as file:
         json.dump(dataset, file)
 
-
     print("Extracting image features...")
     image_features = image_feature_extraction(dataset, images_dir=args.image_folder, device=device)
     print("Extracting text features...")

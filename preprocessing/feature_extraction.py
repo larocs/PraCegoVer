@@ -9,6 +9,7 @@ from torchvision import transforms
 import tqdm
 from nltk.corpus import stopwords
 import numpy as np
+import cuml
 
 class Dataset(torch.utils.data.Dataset):
     def __init__(self, dataset, images_dir):
@@ -56,15 +57,15 @@ def image_feature_extraction(dataset, images_dir, device):
 
     features = torch.concat(feature_list, dim=0)
 
-    # print('Reducing dimensions of image features...')
-    # reducer = umap.UMAP(n_neighbors=80,
-    #                     min_dist=0,
-    #                     n_components=900,
-    #                     random_state=42,
-    #                     metric='correlation')
-    #
-    # features = reducer.fit_transform(features.cpu())
-    np.save("image_features.npy", features.cpu())
+    print('Reducing dimensions of image features...')
+    reducer = cuml.UMAP(n_neighbors=80,
+                        min_dist=0,
+                        n_components=900,
+                        random_state=42,
+                        metric='correlation')
+
+    features = reducer.fit_transform(features.cpu().numpy())
+    np.save("image_features.npy", features)
     del model
     return features
 

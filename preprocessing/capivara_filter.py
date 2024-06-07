@@ -69,7 +69,6 @@ def capivara_filter(dataset, images_dir, clip_thr, device):
                 example = {}
                 for k, v in example_list.items():
                     example[k] = v[i]
-                # print(example)
                 output_data.append(example)
 
     del model

@@ -10,8 +10,8 @@ from sklearn.metrics import pairwise_distances
 
 def get_clusters(features):
     clusterer = cuml.cluster.hdbscan.HDBSCAN(min_cluster_size=200, min_samples=10,
-                                             max_cluster_size=10000,
-                                             gen_min_span_tree=True, verbose=True, output_type='numpy')
+                                             max_cluster_size=10000, gen_min_span_tree=True,
+                                             verbose=True, output_type='numpy')
     clusterer.fit(features)
     labels = np.asarray(clusterer.labels_)
     np.save("clusters.npy", labels)
@@ -66,5 +66,5 @@ def deduplicate(image_features, text_features, clusters,
             for dups in duplicates.values():
                 file.write(f"{dups}\n")
                 dedup_indeces.append(dups[0])
-            
+
     return dedup_indeces
